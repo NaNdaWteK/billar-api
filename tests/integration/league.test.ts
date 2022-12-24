@@ -39,6 +39,15 @@ describe('League', () => {
     expect(response.body.name).toBe(payload.name);
     expect(response.body.type).toBe(payload.type);
   });
+  it('can be find all by query', async () => {
+    const response = await request(await app.server)
+      .get('/api/v1/league/')
+      .send({ name: payload.name });
+    console.log(response);
+    expect(response.statusCode).toBe(SUCCESS);
+    expect(response.body[0].name).toBe(payload.name);
+    expect(response.body[0].type).toBe(payload.type);
+  });
   it('need payload fields', async () => {
     const payload = {
       name: 'Liga 2022',

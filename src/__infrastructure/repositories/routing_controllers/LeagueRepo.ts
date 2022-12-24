@@ -1,4 +1,4 @@
-import { BaseEntity } from 'typeorm';
+import { BaseEntity, FindOptionsWhere } from 'typeorm';
 import LeagueEntity from './entities/LeagueEntity';
 
 export default class LeagueRepo extends BaseEntity {
@@ -7,5 +7,8 @@ export default class LeagueRepo extends BaseEntity {
   }
   async findById(id: string) {
     return LeagueEntity.findOne({ where: { id } });
+  }
+  async findAll(query: FindOptionsWhere<LeagueEntity>) {
+    return LeagueEntity.find({ where: query });
   }
 }
