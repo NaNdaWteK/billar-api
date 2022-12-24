@@ -2,11 +2,17 @@ import request from 'supertest';
 import { startServer } from '../test_support/server';
 
 const CREATED = 201;
+const SUCCESS = 200;
 const BAD_REQUEST = 400;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let app: any;
 describe('League', () => {
+  let leagueId = '';
+  const payload = {
+    name: 'Liga 2022',
+    type: 'Bola 8',
+  };
   beforeAll(async () => {
     app = await startServer();
   });
@@ -15,16 +21,21 @@ describe('League', () => {
     await app.stop();
   });
   it('can be created', async () => {
-    const payload = {
-      name: 'Liga 2022',
-      type: 'Bola 8',
-    };
-
     const response = await request(await app.server)
       .post('/api/v1/league')
       .send(payload);
+    leagueId = response.body.id;
 
     expect(response.statusCode).toBe(CREATED);
+    expect(response.body.name).toBe(payload.name);
+    expect(response.body.type).toBe(payload.type);
+  });
+  it('can be find by id', async () => {
+    const response = await request(await app.server).get(
+      `/api/v1/league/${leagueId}`
+    );
+
+    expect(response.statusCode).toBe(SUCCESS);
     expect(response.body.name).toBe(payload.name);
     expect(response.body.type).toBe(payload.type);
   });

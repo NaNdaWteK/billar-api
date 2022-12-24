@@ -11,6 +11,7 @@ export class ErrorHandler implements KoaMiddlewareInterface {
     try {
       await next();
     } catch (error) {
+      console.log(error.message, error.stack);
       configuration.infra.logger.error(`Error: ${error.message}`, {
         stack: error.stack,
         errors: error.errors,
