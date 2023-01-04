@@ -8,7 +8,9 @@ export default class LeagueRepo extends BaseEntity {
   async findById(id: string) {
     return LeagueEntity.findOne({ where: { id } });
   }
-  async findAll(query: FindOptionsWhere<LeagueEntity>) {
-    return LeagueEntity.find({ where: query });
+  async findAll(query: Partial<LeagueEntity>) {
+    return LeagueEntity.find({
+      where: query as FindOptionsWhere<LeagueEntity>,
+    });
   }
 }

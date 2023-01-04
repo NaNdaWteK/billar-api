@@ -1,7 +1,6 @@
-import { FindOptionsWhere } from 'typeorm';
 import configuration from '../../config/infra';
-import LeagueEntity from '../../__infrastructure/repositories/routing_controllers/entities/LeagueEntity';
-import LeagueRepo from '../../__infrastructure/repositories/routing_controllers/LeagueRepo';
+import LeagueRepo from '../../__infrastructure/repositories/routing_controllers/RCLeagueRepo';
+import { League } from '../domain/interfaces';
 export default class FindLeagueService {
   private logger;
   private repo;
@@ -9,8 +8,8 @@ export default class FindLeagueService {
     this.logger = configuration.infra.logger;
     this.repo = new LeagueRepo();
   }
-  async findAll(query: FindOptionsWhere<LeagueEntity>) {
-    const leagues = (await this.repo.findAll(query)) as LeagueEntity[];
+  async findAll(query: Partial<League>) {
+    const leagues = (await this.repo.findAll(query)) as League[];
     this.logger.info('Finded leagues', { leagues });
 
     return leagues;

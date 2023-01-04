@@ -1,4 +1,4 @@
-import LeagueEntity from '../../__infrastructure/repositories/routing_controllers/entities/LeagueEntity';
+import { League } from '../domain/interfaces';
 import FindLeagueService from '../services/FindLeagueService';
 export default class FindLeagueHandler {
   private readonly findLeagueService;
@@ -6,6 +6,6 @@ export default class FindLeagueHandler {
     this.findLeagueService = new FindLeagueService();
   }
   async execute(id: string) {
-    return (await this.findLeagueService.find(id)) as LeagueEntity;
+    return (await this.findLeagueService.find(id)) as League;
   }
 }

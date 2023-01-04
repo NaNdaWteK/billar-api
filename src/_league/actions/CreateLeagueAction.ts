@@ -1,4 +1,4 @@
-import LeagueEntity from '../../__infrastructure/repositories/routing_controllers/entities/LeagueEntity';
+import { League } from '../domain/interfaces';
 import CreateLeagueService from '../services/CreateLeagueService';
 
 export default class CreateLeagueAction {
@@ -6,7 +6,7 @@ export default class CreateLeagueAction {
   constructor() {
     this.createLeagueService = new CreateLeagueService();
   }
-  async execute(data: Partial<LeagueEntity>) {
+  async execute(data: Partial<League>) {
     return this.createLeagueService.execute(data);
   }
 }

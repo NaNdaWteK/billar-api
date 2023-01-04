@@ -55,7 +55,7 @@ describe('League', () => {
     const response = await request(await app.server)
       .post('/api/v1/league')
       .send(payload);
-
+    console.log(response.statusCode, response.body);
     expect(response.statusCode).toBe(BAD_REQUEST);
     expect(response.body.message).toBe(
       'Invalid body, check \'errors\' property for more info.'

@@ -1,5 +1,4 @@
-import { FindOptionsWhere } from 'typeorm';
-import LeagueEntity from '../../__infrastructure/repositories/routing_controllers/entities/LeagueEntity';
+import { League } from '../domain/interfaces';
 import FindAllLeagueService from '../services/FindAllLeagueService';
 
 export default class FindAllLeagueHandler {
@@ -7,7 +6,7 @@ export default class FindAllLeagueHandler {
   constructor() {
     this.findAllLeagueService = new FindAllLeagueService();
   }
-  async execute(query: FindOptionsWhere<LeagueEntity>) {
-    return (await this.findAllLeagueService.findAll(query)) as LeagueEntity[];
+  async execute(query: Partial<League>) {
+    return (await this.findAllLeagueService.findAll(query)) as League[];
   }
 }

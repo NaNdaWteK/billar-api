@@ -11,10 +11,9 @@ import { Service } from 'typedi';
 import CreateLeagueHandler from '../../../_league/controllers/CreateLeagueHandler';
 import FindLeagueHandler from '../../../_league/controllers/FindLeagueHandler';
 import FindAllLeagueHandler from '../../../_league/controllers/FindAllLeagueHandler';
-import LeagueEntity from '../../repositories/routing_controllers/entities/LeagueEntity';
-import schemas, { League } from '../../schemas';
+import schemas, { League as LeagueSchema } from '../../schemas';
 import configuration from '../../../config/infra';
-import { FindOptionsWhere } from 'typeorm';
+import { League } from '../../../_league/domain/interfaces';
 
 @Controller('/api/v1')
 @Service()
@@ -61,8 +60,8 @@ export default class LeagueController {
   @Post('/league')
   async create(
     @Body({ required: true, validate: true })
-      body: League
-  ): Promise<LeagueEntity> {
+      body: LeagueSchema
+  ): Promise<League> {
     this.logger.info('Create League endpoint executed');
     return this.createLeagueHandler.execute(body);
   }
@@ -89,7 +88,7 @@ export default class LeagueController {
   })
   @HttpCode(200)
   @Get('/league/:id')
-  async find(@Param('id') id: string): Promise<LeagueEntity> {
+  async find(@Param('id') id: string): Promise<League> {
     this.logger.info('Find League endpoint executed', { id });
     return this.findLeagueHandler.execute(id);
   }
@@ -113,9 +112,7 @@ export default class LeagueController {
   })
   @HttpCode(200)
   @Get('/league')
-  async findAll(
-    @Body() query: FindOptionsWhere<LeagueEntity>
-  ): Promise<LeagueEntity[]> {
+  async findAll(@Body() query: Partial<League>): Promise<League[]> {
     this.logger.info('Find All Leagues endpoint executed', { query });
     return this.findAllLeagueHandler.execute(query);
   }
