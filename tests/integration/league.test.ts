@@ -43,7 +43,6 @@ describe('League', () => {
     const response = await request(await app.server)
       .get('/api/v1/league/')
       .send({ name: payload.name });
-    console.log(response);
     expect(response.statusCode).toBe(SUCCESS);
     expect(response.body[0].name).toBe(payload.name);
     expect(response.body[0].type).toBe(payload.type);

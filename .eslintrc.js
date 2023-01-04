@@ -18,5 +18,5 @@ module.exports = {
     semi: ['error', 'always'],
     '@typescript-eslint/no-explicit-any': ['error', { ignoreRestArgs: false }],
   },
-  ignorePatterns: ['node_modules', 'dist'],
+  ignorePatterns: ['node_modules', 'dist', 'src/public/*'],
 };

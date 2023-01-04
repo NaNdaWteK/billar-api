@@ -1,4 +1,6 @@
 import Router from 'koa-router';
+import serve from 'koa-static';
+import mount from 'koa-mount';
 import * as rc from 'routing-controllers';
 import * as to from 'typeorm';
 import morgan from 'koa-morgan';
@@ -68,6 +70,7 @@ export class RoutingControllerServer {
       })
     );
     this.app.use(morgan('dev'));
+    this.app.use(mount('/images/', serve(__dirname + '/../public/images/')));
     this.app.use(this.router.routes()).use(this.router.allowedMethods());
     const dataSource = new to.DataSource({
       type: 'postgres',

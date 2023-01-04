@@ -1,5 +1,4 @@
-import configuration from './config/infra';
-import { RoutingControllerServer } from './__infrastructure/RoutingControllersServer';
+import { httpServer } from './__infrastructure/Server';
 
 export default class App {
   static async main() {
@@ -11,10 +10,8 @@ export default class App {
       console.error(reason);
     });
 
-    const rcs = await RoutingControllerServer.create(
-      configuration.infra.logger
-    );
-    await rcs.start();
-    return rcs;
+    const server = await httpServer();
+    await server.start();
+    return server;
   }
 }
