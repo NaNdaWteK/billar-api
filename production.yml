@@ -1,0 +1,36 @@
+version: '3.3'
+
+services:
+  billar-postgres:
+    image: postgres:14.4
+    container_name: billar-postgres
+    ports:
+      - '5439:5439'
+    expose:
+      - '5439'
+    restart: unless-stopped
+    volumes:
+      - ./databases/postgres/:/var/lib/postgresql/data
+    networks:
+      - nginxproxy_billar_app
+    command:
+      - '-p 5439'
+    env_file:
+      - .env.production
+
+  billar-node:
+    build: .
+    container_name: billar-node
+    ports:
+      - '8000:8000'
+    restart: unless-stopped
+    networks:
+      - nginxproxy_billar_app
+    env_file:
+      - .env.production
+
+networks:
+  nginxproxy_billar_app:
+    external:
+      name: nginxproxy_billar_app
+# docker-compose -f production.yml up --build
