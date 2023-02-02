@@ -1,6 +1,5 @@
 # Artifacts
 /node_modules/
-/dist/
 /coverage
 
 # Storage
