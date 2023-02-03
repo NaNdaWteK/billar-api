@@ -21,16 +21,21 @@ services:
   billar-node:
     build: .
     container_name: billar-node
+    depends_on:
+      - billar-postgres
     ports:
       - '8000:8000'
+      - '8001:8001'
     restart: unless-stopped
     networks:
       - nginxproxy_billar_app
     env_file:
       - .env.production
+    command: sh -c "sleep 5; pm2-runtime start ecosystem.config.js"
 
 networks:
   nginxproxy_billar_app:
     external:
       name: nginxproxy_billar_app
 # docker-compose -f production.yml up --build
+# docker exec -it billar-node  pm2 monit
