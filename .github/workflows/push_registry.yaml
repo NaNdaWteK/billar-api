@@ -6,8 +6,9 @@ on:
       - production
 
 env:
-  DOCKER_REGISTRY: docker.pkg.github.com
+  DOCKER_REGISTRY: ghcr.io
   DOCKER_IMAGE: nandawtek/billar-api
+  IMAGE_NAME: billar-api
 
 jobs:
   build:
@@ -25,13 +26,16 @@ jobs:
         run: echo "::set-output name=version::$(cat package.json | jq -r .version)"
 
       - name: Build Docker Image
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v4
         with:
           context: .
           push: true
           tags: ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${{ steps.get_version.outputs.version }}
 
-      - name: Login to GitHub Package Registry
-        uses: actions/docker/login@v1
-        with:
-          registry: docker.pkg.github.com
+      - name: Log in to registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
+
+      - name: Push Docker Image
+        run: |
+          docker tag ${IMAGE_NAME} ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${{ steps.get_version.outputs.version }}
+          docker push ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${{ steps.get_version.outputs.version }}
