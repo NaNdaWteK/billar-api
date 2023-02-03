@@ -24,7 +24,11 @@ jobs:
       - name: Get Package Version
         id: get_version
         run: echo "::set-output name=version::$(cat package.json | jq -r .version)"
-
+      - name: View env
+        run: |
+          echo ${DOCKER_REGISTRY}
+          echo ${DOCKER_IMAGE}
+          echo ${IMAGE_NAME}
       - name: Build Docker Image
         uses: docker/build-push-action@v4
         with:
