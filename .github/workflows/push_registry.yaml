@@ -35,8 +35,3 @@ jobs:
         uses: actions/docker/login@v1
         with:
           registry: docker.pkg.github.com
-
-      - name: Push Docker Image
-        uses: docker/push-action@v1
-        with:
-          tags: ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${{ steps.get_version.outputs.version }}
