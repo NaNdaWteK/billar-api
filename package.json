@@ -1,6 +1,6 @@
 {
-  "name": "backend-boilerplate",
-  "version": "1.0.0",
+  "name": "billar-api",
+  "version": "0.0.1",
   "main": "serve.js",
   "license": "MIT",
   "devDependencies": {
