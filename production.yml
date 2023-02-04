@@ -16,10 +16,10 @@ services:
     command:
       - '-p 5439'
     env_file:
-      - .env.production
+      - .env.production.example
 
   billar-node:
-    image: ghcr.io/nandawtek/billar-api:0.0.1
+    image: ghcr.io/nandawtek/billar-api:${APP_VERSION}
     container_name: billar-node
     depends_on:
       - billar-postgres
@@ -30,12 +30,10 @@ services:
     networks:
       - nginxproxy_billar_app
     env_file:
-      - .env.production
+      - .env.production.example
     command: sh -c "sleep 5; pm2-runtime start ecosystem.config.js --watch"
 
 networks:
   nginxproxy_billar_app:
     external:
       name: nginxproxy_billar_app
-# docker-compose -f production.yml up --build
-# docker exec -it billar-node  pm2 monit
