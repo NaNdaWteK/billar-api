@@ -1,6 +1,6 @@
 {
   "name": "billar-api",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "main": "serve.js",
   "license": "MIT",
   "devDependencies": {
