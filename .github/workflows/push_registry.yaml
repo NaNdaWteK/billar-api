@@ -10,7 +10,11 @@ env:
   IMAGE_NAME: billar-api
 
 jobs:
+  test:
+    uses: ./.github/workflows/tests.yaml
+
   build:
+    needs: [test]
     runs-on: ubuntu-latest
 
     steps:
