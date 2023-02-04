@@ -14,3 +14,4 @@ __.txt
 
 # Environment
 .env
+.env.production
