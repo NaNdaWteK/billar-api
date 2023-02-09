@@ -25,7 +25,7 @@ describe('League', () => {
       .post('/api/v1/league')
       .send(payload);
     leagueId = response.body.id;
-
+    console.log(response.body);
     expect(response.statusCode).toBe(CREATED);
     expect(response.body.name).toBe(payload.name);
     expect(response.body.type).toBe(payload.type);
