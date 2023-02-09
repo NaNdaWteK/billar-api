@@ -3,6 +3,7 @@ import httpStatus from 'http-status';
 import { KoaMiddlewareInterface, Middleware } from 'routing-controllers';
 import configuration from '../../config/infra';
 import { Service } from 'typedi';
+import ErrorAdapter from '../_core/ErrorAdapter';
 
 @Service()
 @Middleware({ type: 'before' })
@@ -11,17 +12,11 @@ export class ErrorHandler implements KoaMiddlewareInterface {
     try {
       await next();
     } catch (error) {
-      console.log(error.message, error.stack);
-      configuration.infra.logger.error(`Error: ${error.message}`, {
-        stack: error.stack,
-        errors: error.errors,
-      });
-      const status = error.httpCode || httpStatus.INTERNAL_SERVER_ERROR;
+      const err = new ErrorAdapter(error);
+      configuration.infra.logger.error(err.message, err.toLog());
+      const status = err.code || httpStatus.INTERNAL_SERVER_ERROR;
       context.status = status;
-      context.body = {
-        message: error.message,
-        errors: error.errors || {},
-      };
+      context.body = err.toResponse();
       return;
     }
   }

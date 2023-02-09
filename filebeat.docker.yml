@@ -1,0 +1,14 @@
+logging.level: info
+logging.to_files: false
+
+filebeat.inputs:
+  - type: log
+    enabled: true
+    paths:
+      - '/var/lib/docker/containers/logs/*.log'
+    json.keys_under_root: true
+
+output.elasticsearch:
+  hosts: ['https://elasticsearch.nandawtek.es']
+  username: elastic
+  password: elk_24xA_1_NN
