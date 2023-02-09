@@ -8,6 +8,7 @@ module.exports = {
         RESTAPI_PORT: 8000,
       },
       exec_mode: 'cluster',
+      ignore_watch: ['logs'],
       // instances: 2,
     },
     {
@@ -18,6 +19,7 @@ module.exports = {
         RESTAPI_PORT: 8001,
       },
       exec_mode: 'cluster',
+      ignore_watch: ['logs'],
       // instances: 2,
     },
   ],
