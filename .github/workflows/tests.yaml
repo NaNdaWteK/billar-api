@@ -35,5 +35,8 @@ jobs:
       - name: Add .env
         run: cp .env.example .env && cat .env
 
+      - name: Create Logs File
+        run: mkdir logs && touch logs/logs.log
+
       - name: Launch Test
         run: yarn test
