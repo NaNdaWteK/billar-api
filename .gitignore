@@ -6,7 +6,7 @@
 *.db
 databases/*
 
-# Logs
+yarn-error.log
 *.log
 
 # Developer info files
