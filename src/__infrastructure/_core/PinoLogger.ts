@@ -11,7 +11,7 @@ export default class PinoLogger implements LoggerInterface {
     this.fileLogger = logger({
       transport: {
         target: 'pino/file',
-        options: { destination: __dirname + '/../../../logs/logs.log' },
+        options: { destination: process.cwd() + '/logs/logs.log' },
       },
     });
     this.logger = logger({
