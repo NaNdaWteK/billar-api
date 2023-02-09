@@ -75,8 +75,9 @@ export class RoutingControllerServer {
     const dataSource = new to.DataSource({
       type: 'postgres',
       database: config.databaseName,
-      synchronize: false,
-      migrationsRun: false,
+      synchronize: true,
+      // synchronize: false,
+      // migrationsRun: false,
       host: config.databaseHost,
       port: parseInt(config.databasePort as string),
       username: config.databaseUser,
