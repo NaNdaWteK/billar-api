@@ -15,3 +15,5 @@ __.txt
 # Environment
 .env
 .env.production
+
+filebeat.docker.yml
