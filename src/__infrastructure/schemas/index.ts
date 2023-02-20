@@ -39,11 +39,33 @@ export class League {
   @IsDate()
     deletedAt: Date | null;
 }
+
+export class UpdateLeague {
+  @IsOptional()
+  @IsString()
+    id: string;
+  @IsOptional()
+  @IsString()
+    name: string;
+  @IsOptional()
+  @IsString()
+    type: string;
+  @IsOptional()
+  @IsDate()
+    createdAt: Date;
+  @IsOptional()
+  @IsDate()
+    updatedAt: Date;
+  @IsOptional()
+  @IsDate()
+    deletedAt: Date | null;
+}
+
 export default validationMetadatasToSchemas({
   // eslint-disable-next-line @typescript-eslint/no-var-requires, @typescript-eslint/no-require-imports
   classTransformerMetadataStorage: require('class-transformer/cjs/storage')
     .defaultMetadataStorage,
 }) as Record<
-  'Healthz' | 'League' | 'ValidationErrors',
+  'Healthz' | 'League' | 'UpdateLeague' | 'ValidationErrors',
   import('openapi3-ts').SchemaObject
 >;

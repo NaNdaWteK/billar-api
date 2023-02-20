@@ -25,7 +25,6 @@ describe('League', () => {
       .post('/api/v1/league')
       .send(payload);
     leagueId = response.body.id;
-    console.log(response.body);
     expect(response.statusCode).toBe(CREATED);
     expect(response.body.name).toBe(payload.name);
     expect(response.body.type).toBe(payload.type);
@@ -47,6 +46,15 @@ describe('League', () => {
     expect(response.body[0].name).toBe(payload.name);
     expect(response.body[0].type).toBe(payload.type);
   });
+  it('can be edit by id', async () => {
+    const updatedField = 'New name';
+    const response = await request(await app.server)
+      .put(`/api/v1/league/${leagueId}`)
+      .send({ name: updatedField });
+
+    expect(response.statusCode).toBe(SUCCESS);
+    expect(response.body.name).toBe(updatedField);
+  });
   it('need payload fields', async () => {
     const payload = {
       name: 'Liga 2022',
@@ -55,7 +63,6 @@ describe('League', () => {
     const response = await request(await app.server)
       .post('/api/v1/league')
       .send(payload);
-    console.log(response.statusCode, response.body);
     expect(response.statusCode).toBe(BAD_REQUEST);
     expect(response.body.message).toBe(
       'Invalid body, check \'errors\' property for more info.'

@@ -1,5 +1,5 @@
 process.env.NODE_ENV = 'testing';
-process.env.RESTAPI_PORT = '4000';
+process.env.RESTAPI_PORT = '5000';
 import 'reflect-metadata';
 import { routingControllersToSpec } from 'routing-controllers-openapi';
 import * as rc from 'routing-controllers';

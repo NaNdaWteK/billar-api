@@ -13,4 +13,11 @@ export default class LeagueRepo extends BaseEntity {
       where: query as FindOptionsWhere<LeagueEntity>,
     });
   }
+  async updateOne(id: string, body: Partial<LeagueEntity>) {
+    const updated = await LeagueEntity.update(id, body);
+    if (updated.affected && updated.affected > 0) {
+      return this.findById(id);
+    }
+    return updated;
+  }
 }
