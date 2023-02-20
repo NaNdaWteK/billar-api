@@ -14,6 +14,8 @@ import { CorsHandler } from './middlewares/CorsHandler';
 import { ErrorHandler } from './middlewares/ErrorHandler';
 import LeagueEntity from './repositories/routing_controllers/entities/LeagueEntity';
 import { Service } from 'typedi';
+import PlayerController from './controllers/routing_controllers/PlayerController';
+import PlayerEntity from './repositories/routing_controllers/entities/PlayerEntity';
 
 @Service()
 export class RoutingControllerServer {
@@ -28,7 +30,12 @@ export class RoutingControllerServer {
     this.router = new Router();
     this.app = rc.createKoaServer({
       middlewares: [ErrorHandler, CorsHandler],
-      controllers: [HealthzController, LeagueController, Docs],
+      controllers: [
+        HealthzController,
+        LeagueController,
+        PlayerController,
+        Docs,
+      ],
       defaultErrorHandler: false,
       cors: true,
     });
@@ -82,7 +89,7 @@ export class RoutingControllerServer {
       port: parseInt(config.databasePort as string),
       username: config.databaseUser,
       password: config.databasePassword,
-      entities: [LeagueEntity],
+      entities: [LeagueEntity, PlayerEntity],
     });
     await dataSource
       .initialize()

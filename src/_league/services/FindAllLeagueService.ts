@@ -1,12 +1,12 @@
 import configuration from '../../config/infra';
-import LeagueRepo from '../../__infrastructure/repositories/routing_controllers/RCLeagueRepo';
+import { leagueRepo } from '../../__infrastructure/repositories/repositories/LeagueRepo';
 import { League } from '../domain/interfaces';
 export default class FindLeagueService {
   private logger;
   private repo;
   constructor() {
     this.logger = configuration.infra.logger;
-    this.repo = new LeagueRepo();
+    this.repo = leagueRepo;
   }
   async findAll(query: Partial<League>) {
     const leagues = (await this.repo.findAll(query)) as League[];
