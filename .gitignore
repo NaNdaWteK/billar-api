@@ -9,9 +9,11 @@ databases/*
 yarn-error.log
 *.log
 
+# Build
+dist/*
+
 # Developer info files
 __.txt
-
 # Environment
 .env
 .env.production
