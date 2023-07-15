@@ -12,5 +12,10 @@ EXPOSE 8001
 RUN yarn global add pm2
 RUN yarn --production=true
 
+RUN addgroup -S nonroot \
+    && adduser -S nonroot -G nonroot
+
+USER nonroot
+
 
 

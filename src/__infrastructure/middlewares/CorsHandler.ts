@@ -5,7 +5,7 @@ import { Service } from 'typedi';
 @Middleware({ type: 'before' })
 export class CorsHandler implements KoaMiddlewareInterface {
   public async use(ctx: Koa.Context, next: Koa.Next) {
-    ctx.set('Access-Control-Allow-Origin', '*');
+    ctx.set('Access-Control-Allow-Origin', 'www.billar-app.pancheta-squad.com');
     ctx.set('Access-Control-Allow-Credentials', 'true');
     ctx.set(
       'Access-Control-Allow-Headers',
