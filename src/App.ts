@@ -11,7 +11,7 @@ export default class App {
     });
 
     const server = await httpServer();
-    await server.start();
+    server.start();
     return server;
   }
 }
