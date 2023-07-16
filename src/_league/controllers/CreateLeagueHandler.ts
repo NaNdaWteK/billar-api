@@ -6,6 +6,6 @@ export default class CreateLeagueHandler {
     this.createLeagueService = new CreateLeagueService();
   }
   async execute(data: Partial<League>) {
-    return (await this.createLeagueService.execute(data)) as League;
+    return await this.createLeagueService.execute(data);
   }
 }

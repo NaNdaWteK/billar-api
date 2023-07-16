@@ -6,6 +6,6 @@ export default class FindLeagueHandler {
     this.findLeagueService = new FindLeagueService();
   }
   async execute(id: string) {
-    return (await this.findLeagueService.find(id)) as League;
+    return await this.findLeagueService.find(id);
   }
 }

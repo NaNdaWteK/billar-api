@@ -6,6 +6,6 @@ export default class UpdateOnePlayerHandler {
     this.updateOnePlayerService = new UpdateOnePlayerService();
   }
   async execute(id: string, body: Partial<Player>) {
-    return (await this.updateOnePlayerService.updateOne(id, body)) as Player;
+    return await this.updateOnePlayerService.updateOne(id, body);
   }
 }

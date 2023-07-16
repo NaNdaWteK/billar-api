@@ -6,6 +6,6 @@ export default class CreatePlayerHandler {
     this.createPlayerService = new CreatePlayerService();
   }
   async execute(data: Partial<Player>) {
-    return (await this.createPlayerService.execute(data)) as Player;
+    return await this.createPlayerService.execute(data);
   }
 }

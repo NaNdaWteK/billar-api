@@ -7,6 +7,6 @@ export default class FindAllLeagueHandler {
     this.findAllLeagueService = new FindAllLeagueService();
   }
   async execute(query: Partial<League>) {
-    return (await this.findAllLeagueService.findAll(query)) as League[];
+    return await this.findAllLeagueService.findAll(query);
   }
 }

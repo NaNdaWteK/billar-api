@@ -7,6 +7,6 @@ export default class FindAllPlayerHandler {
     this.findAllPlayerService = new FindAllPlayerService();
   }
   async execute(query: Partial<Player>) {
-    return (await this.findAllPlayerService.findAll(query)) as Player[];
+    return await this.findAllPlayerService.findAll(query);
   }
 }

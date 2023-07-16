@@ -6,6 +6,6 @@ export default class FindPlayerHandler {
     this.findPlayerService = new FindPlayerService();
   }
   async execute(id: string) {
-    return (await this.findPlayerService.find(id)) as Player;
+    return await this.findPlayerService.find(id);
   }
 }
