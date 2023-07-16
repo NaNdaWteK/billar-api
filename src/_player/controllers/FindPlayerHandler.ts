@@ -1,4 +1,3 @@
-import { Player } from '../domain/interfaces';
 import FindPlayerService from '../services/FindPlayerService';
 export default class FindPlayerHandler {
   private readonly findPlayerService;

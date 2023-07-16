@@ -1,4 +1,3 @@
-import { League } from '../domain/interfaces';
 import FindLeagueService from '../services/FindLeagueService';
 export default class FindLeagueHandler {
   private readonly findLeagueService;
