@@ -1,5 +1,4 @@
-import logger, { Logger } from 'pino';
-import pino from 'pino';
+import pino, { Logger } from 'pino';
 import { Service } from 'typedi';
 import LoggerInterface from './LoggerInterface';
 
@@ -8,13 +7,13 @@ export default class PinoLogger implements LoggerInterface {
   private logger: Logger;
   private fileLogger: Logger;
   constructor() {
-    this.fileLogger = logger({
+    this.fileLogger = pino({
       transport: {
         target: 'pino/file',
         options: { destination: process.cwd() + '/logs/logs.log' },
       },
     });
-    this.logger = logger({
+    this.logger = pino({
       transport: {
         target: 'pino-pretty',
       },
