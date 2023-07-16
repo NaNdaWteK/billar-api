@@ -86,7 +86,7 @@ export class RoutingControllerServer {
       // synchronize: false,
       // migrationsRun: false,
       host: config.databaseHost,
-      port: parseInt(config.databasePort as string),
+      port: parseInt(config.databasePort),
       username: config.databaseUser,
       password: config.databasePassword,
       entities: [LeagueEntity, PlayerEntity],
