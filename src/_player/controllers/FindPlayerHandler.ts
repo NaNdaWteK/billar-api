@@ -8,3 +8,4 @@ export default class FindPlayerHandler {
     return await this.findPlayerService.find(id);
   }
 }
+
