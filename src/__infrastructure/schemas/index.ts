@@ -12,7 +12,12 @@ export class Healthz {
     status: string;
 }
 
-export class ValidationError {}
+export class ValidationError {
+  target: unknown
+  property: unknown
+  children: unknown
+  constraints: unknown
+}
 
 export class ValidationErrors {
   @IsString()
