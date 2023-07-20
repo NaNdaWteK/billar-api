@@ -2,14 +2,16 @@ import {
   IsArray,
   IsBoolean,
   IsDate,
+  IsEnum,
   IsOptional,
   IsString,
 } from 'class-validator';
 import { validationMetadatasToSchemas } from 'class-validator-jsonschema';
+import { LeagueType } from '../../_shared/domain/LeagueType';
 
 export class Healthz {
   @IsBoolean()
-    status: string;
+    type: string;
 }
 
 export class ValidationError {
@@ -32,8 +34,44 @@ export class League {
     id: string;
   @IsString()
     name: string;
+  @IsEnum(LeagueType)
+    type: LeagueType;
+  @IsOptional()
+  @IsDate()
+    createdAt: Date;
+  @IsOptional()
+  @IsDate()
+    updatedAt: Date;
+  @IsOptional()
+  @IsDate()
+    deletedAt: Date | null;
+}
+export class UpdateLeague {
+  @IsOptional()
   @IsString()
-    type: string;
+    id: string;
+  @IsOptional()
+  @IsString()
+    name: string;
+  @IsOptional()
+  @IsEnum(LeagueType)
+    type: LeagueType;
+  @IsOptional()
+  @IsDate()
+    createdAt: Date;
+  @IsOptional()
+  @IsDate()
+    updatedAt: Date;
+  @IsOptional()
+  @IsDate()
+    deletedAt: Date | null;
+}
+export class Tournament {
+  @IsOptional()
+  @IsString()
+    id: string;
+  @IsEnum(LeagueType)
+    type: LeagueType;
   @IsOptional()
   @IsDate()
     createdAt: Date;
@@ -45,16 +83,13 @@ export class League {
     deletedAt: Date | null;
 }
 
-export class UpdateLeague {
+export class UpdateTournament {
   @IsOptional()
   @IsString()
     id: string;
   @IsOptional()
-  @IsString()
-    name: string;
-  @IsOptional()
-  @IsString()
-    type: string;
+  @IsEnum(LeagueType)
+    type: LeagueType;
   @IsOptional()
   @IsDate()
     createdAt: Date;
@@ -114,6 +149,8 @@ export default validationMetadatasToSchemas({
   | 'Healthz'
   | 'League'
   | 'UpdateLeague'
+  | 'Tournament'
+  | 'UpdateTournament'
   | 'Player'
   | 'UpdatePlayer'
   | 'ValidationErrors',

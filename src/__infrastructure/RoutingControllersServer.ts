@@ -9,6 +9,7 @@ import config from '../config/default';
 import Docs from './controllers/routing_controllers/Docs';
 import HealthzController from './controllers/routing_controllers/HealthzController';
 import LeagueController from './controllers/routing_controllers/LeagueController';
+import TournamentController from './controllers/routing_controllers/TournamentController';
 import LoggerInterface from './_core/LoggerInterface';
 import { CorsHandler } from './middlewares/CorsHandler';
 import { ErrorHandler } from './middlewares/ErrorHandler';
@@ -16,6 +17,7 @@ import LeagueEntity from './repositories/routing_controllers/entities/LeagueEnti
 import { Service } from 'typedi';
 import PlayerController from './controllers/routing_controllers/PlayerController';
 import PlayerEntity from './repositories/routing_controllers/entities/PlayerEntity';
+import TournamentEntity from './repositories/routing_controllers/entities/TournamentEntity';
 
 @Service()
 export class RoutingControllerServer {
@@ -34,6 +36,7 @@ export class RoutingControllerServer {
         HealthzController,
         LeagueController,
         PlayerController,
+        TournamentController,
         Docs,
       ],
       defaultErrorHandler: false,
@@ -89,7 +92,7 @@ export class RoutingControllerServer {
       port: parseInt(config.databasePort),
       username: config.databaseUser,
       password: config.databasePassword,
-      entities: [LeagueEntity, PlayerEntity],
+      entities: [LeagueEntity, PlayerEntity, TournamentEntity],
     });
     await dataSource
       .initialize()

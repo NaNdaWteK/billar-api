@@ -8,10 +8,9 @@ const BAD_REQUEST = 400;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let app: any;
-describe('League', () => {
-  let leagueId = '';
+describe('Tournament', () => {
+  let tournamentId = '';
   const payload = {
-    name: 'Liga 2022',
     type: LeagueType['Bola 8'],
   };
   beforeAll(async () => {
@@ -23,55 +22,45 @@ describe('League', () => {
   });
   it('can be created', async () => {
     const response = await request(await app.server)
-      .post('/api/v1/league')
+      .post('/api/v1/tournament')
       .send(payload);
-    leagueId = response.body.id;
+    tournamentId = response.body.id;
     expect(response.statusCode).toBe(CREATED);
-    expect(response.body.name).toBe(payload.name);
     expect(response.body.type).toBe(payload.type);
   });
   it('can be find by id', async () => {
     const response = await request(await app.server).get(
-      `/api/v1/league/${leagueId}`
+      `/api/v1/tournament/${tournamentId}`
     );
 
     expect(response.statusCode).toBe(SUCCESS);
-    expect(response.body.name).toBe(payload.name);
     expect(response.body.type).toBe(payload.type);
   });
   it('can be find all by query', async () => {
     const response = await request(await app.server)
-      .get('/api/v1/league/')
-      .send({ name: payload.name });
+      .get('/api/v1/tournament')
+      .send({ type: payload.type });
     expect(response.statusCode).toBe(SUCCESS);
-    expect(response.body[0].name).toBe(payload.name);
     expect(response.body[0].type).toBe(payload.type);
   });
   it('can be edit by id', async () => {
-    const updatedField = 'New name';
+    const updatedField = LeagueType['Bola 8 Francesa'];
     const response = await request(await app.server)
-      .put(`/api/v1/league/${leagueId}`)
-      .send({ name: updatedField });
-
+      .put(`/api/v1/tournament/${tournamentId}`)
+      .send({ type: updatedField });
     expect(response.statusCode).toBe(SUCCESS);
-    expect(response.body.name).toBe(updatedField);
+    expect(response.body.type).toBe(updatedField);
   });
   it('need payload fields', async () => {
     const payload = {
-      name: 'Liga 2022',
-      // type: 'Bola 8',
     };
     const response = await request(await app.server)
-      .post('/api/v1/league')
+      .post('/api/v1/tournament')
       .send(payload);
     expect(response.statusCode).toBe(BAD_REQUEST);
     expect(response.body.message).toBe(
       'Invalid body, check \'errors\' property for more info.'
     );
     expect(response.body.errors[0].property).toBe('type');
-    expect(response.body.errors[0].target.name).toBe(payload.name);
-    expect(response.body.errors[0].constraints.isEnum).toBe(
-      'type must be a valid enum value'
-    );
   });
 });

@@ -9,22 +9,16 @@ import {
 } from 'typeorm';
 import { LeagueType } from '../../../../_shared/domain/LeagueType';
 
-@Entity('league')
-export default class LeagueEntity extends BaseEntity {
+@Entity('tournament')
+export default class TournamentEntity extends BaseEntity {
   @PrimaryColumn('uuid')
     id: string;
   @Column()
-    name: string;
-
-  @Column()
     type: LeagueType;
-
   @CreateDateColumn()
     createdAt: Date;
-
   @UpdateDateColumn()
     updatedAt: Date;
-
   @DeleteDateColumn({ nullable: true, default: null })
     deletedAt?: Date | null;
 }

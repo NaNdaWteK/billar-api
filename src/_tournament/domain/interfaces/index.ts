@@ -8,3 +8,11 @@ export interface League {
   updatedAt: Date;
   deletedAt: Date | null;
 }
+export interface Tournament {
+  id: string;
+  type: LeagueType;
+  createdAt: Date;
+  updatedAt: Date;
+  deletedAt: Date | null;
+}
+
